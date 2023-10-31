@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 
-export default function sendEmail({
+export default async function  sendEmail({
     to,
     template,
     subject
@@ -16,7 +16,7 @@ export default function sendEmail({
         },
     })
 
-    transporter.sendMail({
+    await transporter.sendMail({
         from: process.env.EMAIL,
         to,
         html: template,

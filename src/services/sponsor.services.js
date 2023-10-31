@@ -4,7 +4,6 @@ import path from 'path';
 import { URL } from "url";
 import Handlebars from "handlebars";
 
-
 const addNewSponsorService = async (sponsorData) => {
     try
     {
@@ -12,23 +11,21 @@ const addNewSponsorService = async (sponsorData) => {
         const templateSource = await getEmailTemplate(path.join(__dirname, '../templates/sponsor.template.hbs'));
         const template = Handlebars.compile(templateSource);
         const html = template({
-            user: sponsorData.fullName
+            user: sponsorData.fullName,
+            pack: sponsorData.pack
         })
-
-        sendEmail({
+        await sendEmail({
             to: [sponsorData.email],
             template: html,
-            subject: "Réception de votre demande de sponsoring"
+            subject: `Réception de votre demande de sponsoring: Pack "${sponsorData.pack}"`
         });
 
-        sendEmail({
+        await sendEmail({
             to: [process.env.SUPERUSER_EMAIL],
             template: html,
-            subject: "Réception de votre demande de sponsoring"
+            subject: `Réception de votre demande de sponsoring: Pack "${sponsorData.pack}"`
         });
-        // const newSponsor = new SponsorModel(sponsorData);
-        // await newSponsor.save();
-        return (false);
+        return (true);
     }
     catch  (error)
     {

@@ -38,16 +38,16 @@ app.post('/contact', async (req, res) => {
             user: data.fullName,          
         });
     
-        sendEmail({
-            to: ["contact@mldfa.com"],
-            template: html,
-            subject: "Contact Noticifation Email"
-        });
-    
-        sendEmail({
+        await sendEmail({
             to: [data.email],
             template: html,
-            subject: "Contact Noticifation Email"
+            subject: "Confirmation de réception de votre demande de contact"
+        });
+
+        await sendEmail({
+            to: ["contact@mldfa.com"],
+            template: html,
+            subject: "Confirmation de réception de votre demande de contact"
         });
         res.status(200).json({
             status: 200,

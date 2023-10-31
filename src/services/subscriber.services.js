@@ -22,7 +22,7 @@ const   addNewSubscriberService = async (subscriberData) =>  {
             : "Confirmation votre participation"
         })
 
-        sendEmail({
+        await sendEmail({
             to: [subscriberData.email],
             template: html,
             subject: (subscriberData.dinner) ? "Confirmation votre participation et réservation pour le dîner Gala" 
@@ -30,7 +30,7 @@ const   addNewSubscriberService = async (subscriberData) =>  {
         });
         
 
-        sendEmail({
+        await sendEmail({
             to: [process.env.SUPERUSER_EMAIL],
             template: html,
             subject: (subscriberData.dinner) ? "Confirmation votre participation et réservation pour le dîner Gala" 
