@@ -14,12 +14,9 @@ const   addNewSubscriberService = async (subscriberData) =>  {
         const template = Handlebars.compile(templateSource);
         const html = template({
             user: subscriberData.fullName,
-            firstText: subscriberData.dinner ? "Votre demande a été enregistrée, et nous sommes ravis que vous ayez l'intention de participer à notre journée ainsi qu'au dîner gala. Veuillez noter que la participation au dîner gala est payante, et nous vous contacterons dans les prochains jours pour discuter des modalités de paiement et vous fournir plus de détails."
-            : "Votre demande a été enregistrée. Nous sommes ravis que vous ayez l'intention de participer à notre événement. Dans les prochains jours, nous vous communiquerons le lieu et d'autres détails importants pour que vous puissiez planifier votre participation en toute facilité.",
-            secondText: subscriberData.dinner ? "Nous avons hâte de vous accueillir à notre événement.":
-            "Nous avons hâte de vous accueillir à notre événement.",
             subject: (subscriberData.dinner) ? "Confirmation votre participation et réservation pour le dîner Gala"
-            : "Confirmation votre participation"
+            : "Confirmation votre participation",
+            isDinner: subscriberData.dinner,
         })
 
         await sendEmail({

@@ -48,8 +48,19 @@
         <h1>{{subject}}</h1>
         <p>
             Cher(e) {{user}},<br><br>
-          {{firstText}}<br><br>
-            {{secondText}}<br><br>
+            {{#isDinner}}
+            Votre demande a été enregistrée, et nous sommes ravis que vous ayez l'intention de participer à notre journée ainsi
+            qu'au dîner gala.<br><br>
+            Veuillez noter que la participation au dîner gala est payante <strong>(1100 MAD)</strong>, N'hésitez pas à nous appeler au <strong>06 37 89 14 33</strong>
+            pour le Maroc ou au <strong>+212 6 59 79 40 95</strong> si vous êtes à l'étranger pour discuter des modalités de paiement et vous fournir
+            plus de détails.<br><br>
+            {{/isDinner}}
+            {{^isDinner}}
+            Votre demande a été enregistrée. Nous sommes ravis que vous ayez l'intention de participer à notre événement. Dans les
+            prochains jours, nous vous communiquerons le lieu et d'autres détails importants pour que vous puissiez planifier votre
+            participation en toute facilité.<br><br>
+            {{/isDinner}}
+            Nous avons hâte de vous accueillir à notre événement.<br><br>
             Cordialement,<br><br>
             L’équipe MLDFA
         </p>
