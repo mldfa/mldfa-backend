@@ -1,35 +1,9 @@
-import SponsorModel from "../models/sponsor.models.js";
 import getEmailTemplate from "../utils/getTemplate.js"
 import sendEmail from "../utils/sendEmail.js";
 import path from 'path';
 import { URL } from "url";
 import Handlebars from "handlebars";
 
-const   getAllSponsorsService = async () => {
-    try {
-        const allSponosrs= await SponsorModel.find().exec();
-        return (allSponosrs);
-    }
-    catch (error)
-    {
-        return (null);
-    }
-}
-
-const editSponsorService = async (sponsorData) => {
-   
-    const {_id, ...restData } = sponsorData;
-    try {
-        const updatedSponsor = await SponsorModel.findOneAndUpdate({
-            _id
-        }, restData).exec();
-        return (updatedSponsor);
-    }
-    catch (error)
-    {
-        return (null);
-    }
-}
 
 const addNewSponsorService = async (sponsorData) => {
     try
@@ -64,7 +38,5 @@ const addNewSponsorService = async (sponsorData) => {
 }
 
 export {
-    getAllSponsorsService,
-    editSponsorService,
     addNewSponsorService
 };

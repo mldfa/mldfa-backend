@@ -11,14 +11,10 @@ import path from 'path';
 import { URL } from "url";
 import Handlebars from "handlebars";
 
-//CONFIG
-import { connect } from "./src/config/database.config.js";
 //ROUTES
-import userRouter from "./src/routes/user.routes.js";
-import authRouter from "./src/routes/auth.routes.js";
+
 import sponsorRouter from "./src/routes/sponsor.routes.js";
 import subscriberRouter from "./src/routes/subscribers.routes.js";
-import newsletterSubscriberRouter from './src/routes/newsletterSubscriber.routes.js';
 //APP
 const app = express();
 
@@ -29,11 +25,8 @@ app.use(bodyparser.json());
 app.use(cookieParser());
 
 // Routers
-app.use('/users', userRouter);
-app.use('/auth', authRouter);
 app.use('/sponsors', sponsorRouter);
 app.use('/subscribers', subscriberRouter);
-app.use('/newsletterSubscriber', newsletterSubscriberRouter);
 
 app.post('/contact', async (req, res) => {
     const data = req.body;
@@ -72,5 +65,4 @@ app.post('/contact', async (req, res) => {
 // RUN 
 app.listen(process.env.PORT || 8000, () => {
     console.log(`APPLICATION IS LISTENING ON PORT: ${process.env.PORT || 8000}`);
-    connect();
 });

@@ -1,35 +1,11 @@
 import Handlebars from "handlebars";
-import SubscriberModel from "../models/subscribers.models.js";
 import getEmailTemplate from "../utils/getTemplate.js"
 import sendEmail from "../utils/sendEmail.js";
 import path from 'path';
 import { URL } from "url";
 
-const findAllSubscriberService = async () => {
-    try {
-        const subscribers = await SubscriberModel.find().exec();
-
-        return (subscribers);
-    }
-    catch (error)
-    {
-        return null;
-    }
-}
 
 
-const findNewslettersSubscriberService = async () => {
-    try {
-        const newsletterSubsribers = await SubscriberModel.find({
-            emailVerified: true,
-        }).exec();
-        return (newsletterSubsribers);
-    }
-    catch (error)
-     {
-        return (null);
-     }
-}
 
 const   addNewSubscriberService = async (subscriberData) =>  {
     try {
@@ -73,7 +49,5 @@ const   addNewSubscriberService = async (subscriberData) =>  {
 }
 
 export {
-    findAllSubscriberService,
-    findNewslettersSubscriberService,
     addNewSubscriberService
 }
