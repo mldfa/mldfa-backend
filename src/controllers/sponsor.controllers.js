@@ -1,4 +1,4 @@
-import {  addNewSponsorService } from "../services/sponsor.services.js";
+import {  addNewSponsorService, getSponsorExcelService } from "../services/sponsor.services.js";
 
 
 const addNewSponsorController = async (req, res) => {
@@ -15,6 +15,12 @@ const addNewSponsorController = async (req, res) => {
     }
 }
 
+const getSponsorExcelController = async (req, res) => {
+
+    await getSponsorExcelService(res);
+}
+
 export {
-    addNewSponsorController
+    addNewSponsorController,
+    getSponsorExcelController
 };

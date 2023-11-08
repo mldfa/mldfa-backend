@@ -1,5 +1,6 @@
 import {
-    addNewSubscriberService
+    addNewSubscriberService,
+    getSubscriberExcelService
 } from '../services/subscriber.services.js';
 
 
@@ -16,6 +17,11 @@ const addNewSubscriberController= async (req, res) => {
         res.json(newSubscriber);
 }
 
+const getSubscriberExcelController = async (req, res) => {
+    await getSubscriberExcelService(res);
+}
+
 export {
-    addNewSubscriberController
+    addNewSubscriberController,
+    getSubscriberExcelController
 }

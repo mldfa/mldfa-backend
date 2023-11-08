@@ -11,11 +11,36 @@ import path from 'path';
 import { URL } from "url";
 import Handlebars from "handlebars";
 
+// QUERIES
+
+const createSponsorQuery = `
+  CREATE TABLE IF NOT EXISTS sponsor (
+    id SERIAL PRIMARY KEY,
+    CompanyName VARCHAR(255),
+    fullName VARCHAR(255),
+    email VARCHAR(255),
+    phonenumber VARCHAR(20),
+    pack VARCHAR(50)
+  );
+`;
+
+const createSuscriberQuery = `
+ CREATE TABLE IF NOT EXISTS subscriber (
+    id SERIAL PRIMARY KEY,
+    fullname VARCHAR(255),
+    job VARCHAR(255),
+    activiteArea VARCHAR(255),
+    email VARCHAR(255),
+    phone VARCHAR(20),
+    dinner BOOLEAN
+  );
+`;
 //ROUTES
 
 import sponsorRouter from "./src/routes/sponsor.routes.js";
 import subscriberRouter from "./src/routes/subscribers.routes.js";
 //APP
+import client from "./src/config/client.config.js";
 const app = express();
 
 dotenv.config();
@@ -63,6 +88,14 @@ app.post('/contact', async (req, res) => {
     }
 });
 // RUN 
-app.listen(process.env.PORT || 8000, () => {
+app.listen(process.env.PORT || 8000, async () => {
     console.log(`APPLICATION IS LISTENING ON PORT: ${process.env.PORT || 8000}`);
+    client.connect((err) => {
+        if (err)
+            console.log("ERROR HAPPNED");
+        else
+            console.log('CONNECTED TO DATABASE');
+    });
+    await client.query(createSponsorQuery);
+    await client.query(createSuscriberQuery);
 });
