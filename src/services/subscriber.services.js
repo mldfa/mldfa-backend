@@ -21,7 +21,7 @@ const   addNewSubscriberService = async (subscriberData) =>  {
         const template = Handlebars.compile(templateSource);
         const html = template({
             user: subscriberData.fullName,
-            subject: (subscriberData.dinner) ? "Confirmation votre participation et réservation pour le dîner Gala"
+            subject: (subscriberData.dinner) ? "Confirmation de votre participation et réservation pour le dîner Gala"
             : "Confirmation votre participation",
             isDinner: subscriberData.dinner,
         })
@@ -29,8 +29,8 @@ const   addNewSubscriberService = async (subscriberData) =>  {
         await sendEmail({
             to: [subscriberData.email],
             template: html,
-            subject: (subscriberData.dinner) ? "Confirmation votre participation et réservation pour le dîner Gala" 
-            : "Confirmation votre participation"
+            subject: (subscriberData.dinner) ? "Confirmation de votre participation et réservation pour le dîner Gala" 
+            : "Confirmation de votre participation"
         });
         
 
@@ -38,7 +38,7 @@ const   addNewSubscriberService = async (subscriberData) =>  {
             to: [process.env.SUPERUSER_EMAIL],
             template: html,
             subject: (subscriberData.dinner) ? "Confirmation votre participation et réservation pour le dîner Gala" 
-            : "Confirmation votre participation"
+            : "Confirmation de votre participation"
         });
         await client.query(insertSubscriberQuery, [
             subscriberData.fullName,
