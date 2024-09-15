@@ -7,6 +7,9 @@ import cookieParser from "cookie-parser";
 // OTHER
 import getEmailTemplate from "./src/utils/getTemplate.js"
 import sendEmail from "./src/utils/sendEmail.js";
+import sponsorRouter from "./src/routes/sponsor.routes.js";
+import subscriberRouter from "./src/routes/subscribers.routes.js";
+import Connect from './src/config/mongodb.config.js'
 import path from 'path';
 import { URL } from "url";
 import Handlebars from "handlebars";
@@ -37,10 +40,9 @@ const createSuscriberQuery = `
 `;
 //ROUTES
 
-import sponsorRouter from "./src/routes/sponsor.routes.js";
-import subscriberRouter from "./src/routes/subscribers.routes.js";
+
 //APP
-import client from "./src/config/client.config.js";
+
 const app = express();
 
 dotenv.config();
@@ -90,12 +92,10 @@ app.post('/contact', async (req, res) => {
 // RUN 
 app.listen(process.env.PORT || 8000, async () => {
     console.log(`APPLICATION IS LISTENING ON PORT: ${process.env.PORT || 8000}`);
-    client.connect((err) => {
-        if (err)
-            console.log("ERROR HAPPNED");
-        else
-            console.log('CONNECTED TO DATABASE');
+    Connect().then(()=>
+    {
+        console.log('Database got connected');
+    }).catch(err =>{
+        console.log('Something Went Wrong', err);
     });
-    await client.query(createSponsorQuery);
-    await client.query(createSuscriberQuery);
 });

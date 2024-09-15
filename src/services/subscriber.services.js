@@ -5,13 +5,7 @@ import path from 'path';
 import ExcelJS from 'exceljs';
 import fs from 'fs';
 import { URL } from "url";
-import client from "../config/client.config.js";
-
-const insertSubscriberQuery = `
- INSERT INTO subscriber (fullname, job, activiteArea, email, phone, dinner)
-  VALUES ($1, $2, $3, $4, $5, $6)
-  RETURNING id;
-`;
+import subscriberModel from "../models/subscriber.model.js";
 
 
 const   addNewSubscriberService = async (subscriberData) =>  {
@@ -40,14 +34,8 @@ const   addNewSubscriberService = async (subscriberData) =>  {
             subject: (subscriberData.dinner) ? "Confirmation votre participation et réservation pour le dîner Gala" 
             : "Confirmation de votre participation"
         });
-        await client.query(insertSubscriberQuery, [
-            subscriberData.fullName,
-            subscriberData.Job,
-            subscriberData.ActivityArea,
-            subscriberData.email,
-            subscriberData.phone,
-            subscriberData.dinner
-]);
+        const subsriber = new subscriberModel({...subscriberData});
+        subsriber.save();
         return (true);
     }
     catch (error)
@@ -58,17 +46,14 @@ const   addNewSubscriberService = async (subscriberData) =>  {
 }
 
 const getSubscriberExcelService = async (res) => {
-    const data = await client.query("select * from subscriber;");
-    console.log(data.rows);
+    const data = await subscriberModel.find();
      const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet('Data');
-    const headers = ["id", "Nom Complet", "Profession", "Secteur d’activité", "Email", "Téléphone", "Dinner"];
+    const headers = ["id", "Nom Complet", "Profession", "Secteur d’activité", "Email", "Téléphone", "Dinner", 'COCKTAIL'];
     worksheet.addRow(headers);
-    data.rows.forEach(row => {
-        row = {...row, dinner: row.dinner ? "OUI": "NO"}
-        const values = Object.values(row);
-        console.log(values);
-         worksheet.addRow(values);
+    data.forEach(row => {
+        const values = [row._id, row.fullName, row.Job, row.ActivityArea, row.email, row.phone, row.dinner ? "OUI": "NO", row.cocktail ? "OUI": "NO"];
+        worksheet.addRow(values);
     });
     const now = new Date(Date.now());
     const dt = `${now.getDate()}-${now.getMonth()+1}-${now.getFullYear()}-${now.getHours()}\:${now.getMinutes()}\:${now.getSeconds()}`;
