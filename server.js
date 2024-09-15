@@ -60,7 +60,7 @@ app.use(cookieParser());
 app.use('/sponsors', sponsorRouter);
 app.use('/subscribers', subscriberRouter);
 
-app.use('/contact', contactRouter);
+app.use('/send', contactRouter);
 // RUN 
 app.listen(process.env.PORT || 8000, async () => {
     console.log(`APPLICATION IS LISTENING ON PORT: ${process.env.PORT || 8000}`);

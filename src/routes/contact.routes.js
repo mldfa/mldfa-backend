@@ -2,7 +2,7 @@ import {Router} from 'express';
 
 const contactRouter = Router();
 
-contactRouter.post('/send', async (req, res) => {
+contactRouter.post('/', async (req, res) => {
     const data = req.body;
     try {
         const __dirname = new URL('.', import.meta.url).pathname;
