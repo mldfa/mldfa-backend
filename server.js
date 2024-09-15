@@ -13,6 +13,7 @@ import Connect from './src/config/mongodb.config.js'
 import path from 'path';
 import { URL } from "url";
 import Handlebars from "handlebars";
+import contactRouter from "./src/routes/contact.routes.js";
 
 // QUERIES
 
@@ -55,40 +56,7 @@ app.use(cookieParser());
 app.use('/sponsors', sponsorRouter);
 app.use('/subscribers', subscriberRouter);
 
-app.post('/contact', async (req, res) => {
-    const data = req.body;
-    try {
-        const __dirname = new URL('.', import.meta.url).pathname;
-        const templateSource = await getEmailTemplate(path.join(__dirname, './src/templates/contact.template.hbs'));
-        const template = Handlebars.compile(templateSource);
-        const html = template({
-            user: data.fullName,          
-        });
-    
-        await sendEmail({
-            to: [data.email],
-            template: html,
-            subject: "Confirmation de réception de votre demande de contact"
-        });
-
-        await sendEmail({
-            to: ["contact@mldfa.com"],
-            template: html,
-            subject: "Confirmation de réception de votre demande de contact"
-        });
-        res.status(200).json({
-            status: 200,
-            message: "success"
-        })
-    }
-    catch (error) 
-    {
-        res.status(400).json({
-            status: 400,
-            message: 'bad request'
-        })
-    }
-});
+app.use('/contact', contactRouter);
 // RUN 
 app.listen(process.env.PORT || 8000, async () => {
     console.log(`APPLICATION IS LISTENING ON PORT: ${process.env.PORT || 8000}`);
