@@ -48,7 +48,11 @@ const app = express();
 
 dotenv.config();
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type'],
+  }));
 app.use(bodyparser.json());
 app.use(cookieParser());
 
