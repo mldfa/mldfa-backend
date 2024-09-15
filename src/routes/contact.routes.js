@@ -11,7 +11,7 @@ contactRouter.post('/', async (req, res) => {
     const data = req.body;
     try {
         const __dirname = new URL('.', import.meta.url).pathname;
-        const templateSource = await getEmailTemplate(path.join(__dirname, './src/templates/contact.template.hbs'));
+        const templateSource = await getEmailTemplate(path.join(__dirname, '../templates/contact.template.hbs'));
         const template = Handlebars.compile(templateSource);
         const html = template({
             user: data.fullName,          
