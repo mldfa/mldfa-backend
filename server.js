@@ -5,40 +5,12 @@ import bodyparser from "body-parser";
 import cookieParser from "cookie-parser";
 
 // OTHER
-import getEmailTemplate from "./src/utils/getTemplate.js"
-import sendEmail from "./src/utils/sendEmail.js";
+
 import sponsorRouter from "./src/routes/sponsor.routes.js";
 import subscriberRouter from "./src/routes/subscribers.routes.js";
 import Connect from './src/config/mongodb.config.js'
-import path from 'path';
-import { URL } from "url";
-import Handlebars from "handlebars";
 import contactRouter from "./src/routes/contact.routes.js";
 
-// QUERIES
-
-const createSponsorQuery = `
-  CREATE TABLE IF NOT EXISTS sponsor (
-    id SERIAL PRIMARY KEY,
-    CompanyName VARCHAR(255),
-    fullName VARCHAR(255),
-    email VARCHAR(255),
-    phonenumber VARCHAR(20),
-    pack VARCHAR(50)
-  );
-`;
-
-const createSuscriberQuery = `
- CREATE TABLE IF NOT EXISTS subscriber (
-    id SERIAL PRIMARY KEY,
-    fullname VARCHAR(255),
-    job VARCHAR(255),
-    activiteArea VARCHAR(255),
-    email VARCHAR(255),
-    phone VARCHAR(20),
-    dinner BOOLEAN
-  );
-`;
 //ROUTES
 
 
