@@ -21,7 +21,7 @@ const addNewSponsorService = async (sponsorData) => {
     const sponsorExist = await sponsorModel.exists({
       email: sponsorData.email,
     });
-    if (!sponsorExist) return null;
+    if (sponsorExist) return null;
     await sendEmail({
       to: [sponsorData.email],
       template: html,
