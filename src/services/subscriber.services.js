@@ -33,6 +33,10 @@ const addNewSubscriberService = async (subscriberData) => {
       isBoth: subscriberData.dinner && subscriberData.cocktail,
       isCocktail: subscriberData.cocktail,
     });
+    const subscriberExists = await subscriberModel.exists({
+      email: subscriberData.email,
+    });
+    if (subscriberExists) return undefined;
 
     await sendEmail({
       to: [subscriberData.email],
@@ -45,13 +49,7 @@ const addNewSubscriberService = async (subscriberData) => {
       template: html,
       subject,
     });
-    const checkSubscriber = await subscriberModel.find({
-      email: subscriberData.email,
-    });
-    const subscriberExists = subscriberModel.exists({
-      email: subscriberData.email,
-    });
-    if (subscriberExists) return undefined;
+
     const subsriber = new subscriberModel({ ...subscriberData });
     subsriber.save();
     return true;
