@@ -33,11 +33,13 @@ const addNewSponsorService = async (sponsorData) => {
     const subject = `Réception de votre demande de sponsoring / Sponsorship Request Received`;
     const template = Handlebars.compile(templateSource);
     const html = template(sponsorDataBody);
+    console.log("!!1");
     await sendEmail({
       to: [sponsorData.email],
       template: html,
       subject,
     });
+    console.log("!!2");
     await sendEmail({
       to: [process.env.SUPERUSER_EMAIL],
       template: html,
