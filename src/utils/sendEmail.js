@@ -9,6 +9,7 @@ export default async function sendEmail({ to, template, subject }) {
       user: process.env.EMAIL,
       pass: process.env.EMAIL_PASSWORD,
     },
+    family: 4,
   });
 
   await transporter.sendMail({
