@@ -1,7 +1,7 @@
 import getEmailTemplate from "../utils/getTemplate.js";
 import sendEmail from "../utils/sendEmail.js";
 import path from "path";
-import { URL, fileURLToPath } from "url";
+import { URL } from "url";
 import fs from "fs";
 import Handlebars from "handlebars";
 import ExcelJS from "exceljs";
@@ -9,8 +9,7 @@ import sponsorModel from "../models/sponsor.model.js";
 
 const addNewSponsorService = async (sponsorData) => {
   try {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
+    const __dirname = new URL(".", import.meta.url).pathname;
     const templateSource = await getEmailTemplate(
       path.join(__dirname, "../templates/sponsor.template.hbs")
     );

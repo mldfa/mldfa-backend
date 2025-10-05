@@ -4,17 +4,15 @@ import sendEmail from "../utils/sendEmail.js";
 import path from "path";
 import ExcelJS from "exceljs";
 import fs from "fs";
-import { URL, fileURLToPath } from "url";
+import { URL } from "url";
 import subscriberModel from "../models/subscriber.model.js";
 
 const addNewSubscriberService = async (subscriberData) => {
   let subject = "Moroccan Lighting Days – VIP Confirmation / Confirmation VIP";
   try {
     // const __dirname = new URL(".", import.meta.url).pathname;
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
+    const __dirname = new URL(".", import.meta.url).pathname;
     const templateSource = await getEmailTemplate(
-      // path.join(__dirname, "../templates/client.template.hbs")
       path.join(__dirname, "../templates/client.template.hbs")
     );
     const template = Handlebars.compile(templateSource);
