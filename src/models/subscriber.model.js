@@ -1,30 +1,25 @@
 import { Schema, model } from "mongoose";
 
-
 const SubscriberSchema = new Schema({
   fullName: {
-    type: String
+    type: String,
   },
   Job: {
-    type: String
+    type: String,
   },
   ActivityArea: {
-    type: String
+    type: String,
   },
   email: {
     type: String,
-    unique: true
+    unique: true,
   },
   phone: {
-    type: String
+    type: String,
   },
   dinner: {
-    type: Boolean
+    type: Boolean,
   },
-  cocktail: {
-    type: Boolean
-  }
-})
+});
 
-
-export default model('Subscriber', SubscriberSchema);
+export default model("Subscriber", SubscriberSchema);

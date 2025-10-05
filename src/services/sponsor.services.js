@@ -1,7 +1,7 @@
 import getEmailTemplate from "../utils/getTemplate.js";
 import sendEmail from "../utils/sendEmail.js";
 import path from "path";
-import { URL } from "url";
+import { URL, fileURLToPath } from "url";
 import fs from "fs";
 import Handlebars from "handlebars";
 import ExcelJS from "exceljs";
@@ -9,32 +9,43 @@ import sponsorModel from "../models/sponsor.model.js";
 
 const addNewSponsorService = async (sponsorData) => {
   try {
-    const __dirname = new URL(".", import.meta.url).pathname;
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
     const templateSource = await getEmailTemplate(
       path.join(__dirname, "../templates/sponsor.template.hbs")
     );
-    const template = Handlebars.compile(templateSource);
-    const html = template({
-      user: sponsorData.fullName,
-      pack: sponsorData.pack,
-    });
     const sponsorExist = await sponsorModel.exists({
       email: sponsorData.email,
     });
     if (sponsorExist) return null;
+    const sponsorDataBody = {
+      companyName: sponsorData.organization,
+      fullName: sponsorData.fullName,
+      email: sponsorData.email,
+      phone: sponsorData.phone,
+      pack: sponsorData.pkg,
+      message: sponsorData.message,
+      roundTable: sponsorData.roundTable,
+      studyCase: sponsorData.studyCase,
+      totemSize: sponsorData.totemSize,
+      total: sponsorData.total,
+      vipExtra: sponsorData.vipExtra,
+    };
+    const subject = `Réception de votre demande de sponsoring / Sponsorship Request Received`;
+    const template = Handlebars.compile(templateSource);
+    const html = template(sponsorDataBody);
     await sendEmail({
       to: [sponsorData.email],
       template: html,
-      subject: `Réception de votre demande de sponsoring: Pack "${sponsorData.pack}"`,
+      subject,
     });
-
     await sendEmail({
       to: [process.env.SUPERUSER_EMAIL],
       template: html,
-      subject: `Réception de votre demande de sponsoring: Pack "${sponsorData.pack}"`,
+      subject,
     });
-    const sponsor = new sponsorModel({ ...sponsorData });
-    sponsor.save();
+    const sponsor = new sponsorModel(sponsorDataBody);
+    await sponsor.save();
     return true;
   } catch (error) {
     console.log(error);
@@ -53,6 +64,12 @@ const getSponsorExcelService = async (res) => {
     "Email",
     "Téléphone",
     "Pack",
+    "Message",
+    "Table ronde",
+    "Study case",
+    "Size totem",
+    "total",
+    "Pass VIP",
   ];
   worksheet.addRow(headers);
   data.forEach((row) => {
@@ -63,6 +80,12 @@ const getSponsorExcelService = async (res) => {
       row.email,
       row.phone,
       row.pack,
+      row.message,
+      row.roundTable,
+      row.studyCase,
+      row.totemSize,
+      row.total,
+      row.vipExtra,
     ];
     worksheet.addRow(values);
   });

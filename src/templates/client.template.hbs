@@ -1,76 +1,147 @@
 <html>
-
   <head>
+    <meta charset="UTF-8" />
     <style>
-      /* Add your CSS styles here */ body { font-family: Arial, sans-serif;
-      background-color: #f5f5f5; color: #333; padding: 20px; } .container {
-      max-width: 600px; margin: 0 auto; padding: 20px; background-color: #fff;
-      border-radius: 8px; box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); } .logo {
-      text-align: center; padding: 20px 5px; background-color: black; } h1 {
-      color: #333; text-align: center; } p { font-size: 16px; line-height: 1.6;
-      text-align: center; margin-top: 20px; }
+      /* Same look & feel as your sample */ body { font-family: Arial,
+      sans-serif; background-color: #f5f5f5; color: #333; padding: 20px; }
+      .container { max-width: 600px; margin: 0 auto; padding: 0;
+      background-color: #fff; border-radius: 8px; box-shadow: 0px 2px 6px
+      rgba(0, 0, 0, 0.1); overflow: hidden; } .logo { text-align: center;
+      padding: 0; background-color: #02253c; } .inner { padding: 20px; } h1 {
+      color: #333; text-align: center; margin: 18px 0 8px; font-size: 22px; } p
+      { font-size: 16px; line-height: 1.6; text-align: center; margin-top: 16px;
+      } .hr { height: 1px; background: #e6e6e6; border: 0; margin: 22px 0; }
+      .meta { font-size: 14px; line-height: 1.6; color: #555; text-align:
+      center; } .badge { display: inline-block; font-size: 12px; color: #555;
+      border: 1px solid #ddd; border-radius: 999px; padding: 4px 10px;
+      margin-top: 6px; } ul { text-align: left; display: inline-block; margin:
+      10px auto 0; padding-left: 20px; } .footer { font-size: 12px; color: #666;
+      text-align: center; padding: 16px 20px 22px; } a.btn { display:
+      inline-block; padding: 10px 16px; border-radius: 6px; background: #02253c;
+      color: #fff !important; text-decoration: none; margin-top: 12px; }
     </style>
   </head>
 
   <body>
     <div class="container">
-      <div class="logo" style="background-color: #02253c">
+      <!-- Header / Logo -->
+      <div class="logo">
         <img
-          src="https://i.ibb.co/jJpjDtM/moroccan-Logo.jpg"
-          alt="Your Logo"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZQK_jirFqzkwCrZizk-Kf_0jnIqHzNnVj8w&s"
+          alt="Moroccan Lighting Day"
           width="100%"
-          height="200px"
-          style="object-fit:cover;"
+          height="200"
+          style="object-fit: cover;"
         />
       </div>
-      <h1>{{subject}}</h1>
-      <p>
-        Cher(e)
-        {{user}},<br /><br />
-        {{#if isBoth}}
-          Votre demande a été enregistrée, et nous sommes ravis que vous ayez
-          l'intention de participer à nos journées, le Gala Prestige ainsi que
-          le Cocktail Networking.<br /><br />
-          Veuillez noter que la participation a ces deux cérémonies est payante
-          <strong>(1500 MAD + 800 MAD)</strong>, N'hésitez pas à nous appeler au
-          <strong>+212 6 59 79 40 95</strong>
-          pour discuter des modalités de paiement et vous fournir plus de
-          détails.<br /><br />
-        {{else}}
-          {{#if isDinner}}
-            Votre demande a été enregistrée, et nous sommes ravis que vous ayez
-            l'intention de participer à nos journées ainsi qu'au Gala Prestige.<br
-            /><br />
-            Veuillez noter que la participation au Gala Prestige est payante
-            <strong>(1500 MAD)</strong>, N'hésitez pas à nous appeler au
-            <strong>+212 6 59 79 40 95</strong>
-            pour discuter des modalités de paiement et vous fournir plus de
-            détails.<br /><br />
-          {{else}}
-            {{#if isCocktail}}
-              Votre demande a été enregistrée, et nous sommes ravis que vous
-              ayez l'intention de participer à nos journées ainsi qu'au Cocktail
-              Networking.<br /><br />
-              Veuillez noter que la participation au Cocktail Networking est
-              payante
-              <strong>(800 MAD)</strong>, N'hésitez pas à nous appeler au
-              <strong>+212 6 59 79 40 95</strong>
-              pour discuter des modalités de paiement et vous fournir plus de
-              détails.<br /><br />
-            {{else}}
-              Votre demande a été enregistrée. Nous sommes ravis que vous ayez
-              l'intention de participer à notre événement. Dans les prochains
-              jours, nous vous communiquerons le lieu et d'autres détails
-              importants pour que vous puissiez planifier votre participation en
-              toute facilité.<br /><br />
-            {{/if}}
+
+      <div class="inner">
+        <h1>Moroccan Lighting Days – VIP Confirmation / Confirmation VIP</h1>
+
+        <!-- ===== FRENCH ===== -->
+        <div>
+          <span class="badge">FRANÇAIS</span>
+          <p>
+            Cher(e)
+            {{user}},<br /><br />
+            Merci pour votre inscription à la
+            <strong>Moroccan Lighting Days</strong>. Votre
+            <strong>Pass VIP (750 €)</strong>
+            est
+            <strong>confirmé</strong>.
+          </p>
+
+          <p class="meta">
+            📅
+            <strong>Date : 11-12-13 Juin 2026</strong>
+            <br />
+            📍
+            <strong>Lieu : </strong>
+            Tanger Maroc<br />
+          </p>
+
+          <p style="text-align:center;margin-top:12px;">
+            <strong>Avantages VIP :</strong>
+          </p>
+          <ul>
+            <li>Accès complet aux conférences, panels et ateliers</li>
+            <li>Entrée exclusive aux sessions de networking VIP</li>
+            <li>Espaces réservés et places premium</li>
+            <li>Accompagnement dédié tout au long de l’événement</li>
+          </ul>
+
+          {{#if eventUrl}}
+            <p><a class="btn" href="{{eventUrl}}">Détails de l’événement</a></p>
           {{/if}}
-        {{/if}}
-        Nous avons hâte de vous accueillir à notre événement.<br /><br />
-        Cordialement,<br /><br />
-        L’équipe MLDFA
-      </p>
+          {{#if calendarUrl}}
+            <p><a class="btn" href="{{calendarUrl}}">Ajouter au calendrier</a></p>
+          {{/if}}
+
+          <p class="meta" style="margin-top:16px;">
+            Pour toute assistance, contactez-nous au
+            <strong>{{#if supportPhone}}{{supportPhone}}{{else}}+212 6 59 79 40
+                95{{/if}}</strong>
+            ou par e-mail :
+            <a href="mailto:serraj@mldfa.com">
+              serraj@mldfa.com
+            </a>.
+          </p>
+        </div>
+
+        <hr class="hr" />
+
+        <!-- ===== ENGLISH ===== -->
+        <div>
+          <span class="badge">ENGLISH</span>
+          <p>
+            Dear
+            {{user}},<br /><br />
+            Thank you for registering for
+            <strong>Moroccan Lighting Days</strong>. Your
+            <strong>VIP Pass (€750)</strong>
+            is
+            <strong>confirmed</strong>.
+          </p>
+
+          <p class="meta">
+            📅
+            <strong>Date: </strong>June 11-12-13 2026<br />
+            📍
+            <strong>Location: </strong>
+            Tangier, Morocco<br />
+          </p>
+
+          <p style="text-align:center;margin-top:12px;">
+            <strong>VIP Benefits:</strong>
+          </p>
+          <ul>
+            <li>Full access to conferences, panels, and workshops</li>
+            <li>Exclusive entry to VIP networking sessions</li>
+            <li>Premium seating and reserved areas</li>
+            <li>Dedicated support throughout the event</li>
+          </ul>
+
+          <p class="meta" style="margin-top:16px;">
+            Need help? Reach us at
+            <strong>{{#if supportPhone}}{{supportPhone}}{{else}}+212 6 59 79 40
+                95{{/if}}</strong>
+            or email
+            <a href="mailto:serraj@mldfa.com">
+              serraj@mldfa.com
+            </a>.
+          </p>
+        </div>
+
+        <hr class="hr" />
+
+        <!-- Consent line in both languages -->
+        <div class="footer">
+          Cet e-mail confirme que, en vous inscrivant, vous avez accepté le Pass
+          VIP (750 €).<br />
+          This email confirms that, by subscribing, you agreed to the VIP Pass
+          (€750).
+        </div>
+      </div>
     </div>
   </body>
-
 </html>

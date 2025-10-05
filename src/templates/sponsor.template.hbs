@@ -1,54 +1,97 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <style>
-    /* Add your CSS styles here */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
-      padding: 20px;
-    }
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-    }
-    .logo {
-      text-align: center;
-      padding: 20px 0;
-      background-color: black;
-    }
-    h1 {
-      color: #333;
-      text-align: center;
-    }
-    p {
-      font-size: 16px;
-      line-height: 1.6;
-      text-align: center;
-      margin-top: 20px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="logo" style="background-color:#02253c">
-        <img src="https://i.ibb.co/jJpjDtM/moroccan-Logo.jpg" alt="Your Logo" width="100%" height="200px"
-          style="object-fit:cover;">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body { font-family: Arial, sans-serif; background-color: #f5f5f5; color:
+      #333; padding: 20px; } .container { max-width: 600px; margin: 0 auto;
+      padding: 0; background-color: #fff; border-radius: 8px; box-shadow: 0px
+      2px 6px rgba(0, 0, 0, 0.1); overflow: hidden; } .logo { text-align:
+      center; background-color: #02253c; } .inner { padding: 20px; } h1 { color:
+      #333; text-align: center; font-size: 22px; margin: 18px 0 8px; } p {
+      font-size: 16px; line-height: 1.6; text-align: center; margin-top: 16px; }
+      .hr { height: 1px; background: #e6e6e6; border: 0; margin: 22px 0; } .meta
+      { font-size: 14px; line-height: 1.6; color: #555; text-align: left; } ul {
+      text-align: left; margin: 10px 0 0 0; padding-left: 18px; } .footer {
+      font-size: 12px; color: #666; text-align: center; padding: 16px 20px 22px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header / Logo -->
+      <div class="logo">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZQK_jirFqzkwCrZizk-Kf_0jnIqHzNnVj8w&s"
+          alt="MLDFA Logo"
+          width="100%"
+          height="200"
+          style="object-fit:cover;"
+        />
+      </div>
+
+      <div class="inner">
+        <h1>Réception de votre demande de sponsoring</h1>
+
+        <!-- French Section -->
+        <p>
+          Cher(e)
+          {{fullName}}
+          ({{companyName}}),<br /><br />
+          Nous avons bien reçu votre demande de sponsoring pour le pack
+          <strong>{{pack}}</strong>. Merci pour votre intérêt.<br /><br />
+          Notre équipe vous contactera dans les plus brefs délais pour discuter
+          des modalités et vous fournir plus de détails.
+        </p>
+
+        <div class="meta">
+          <strong>Détails fournis :</strong>
+          <ul>
+            <li>Email : {{email}}</li>
+            <li>Téléphone : {{phone}}</li>
+            <li>Pack choisi : {{pack}}</li>
+            {{#if roundTable}}<li>Participation Table Ronde : Oui</li>{{/if}}
+            {{#if studyCase}}<li>Participation Étude de Cas : Oui</li>{{/if}}
+            {{#if totemSize}}<li>Taille Totem : {{totemSize}}</li>{{/if}}
+            {{#if vipExtra}}<li>VIP supplémentaires : {{vipExtra}}</li>{{/if}}
+            <li>Total estimé : {{total}} €</li>
+          </ul>
+        </div>
+
+        <hr class="hr" />
+
+        <!-- English Section -->
+        <h1>Sponsorship Request Received</h1>
+        <p>
+          Dear
+          {{fullName}}
+          ({{companyName}}),<br /><br />
+          We have received your sponsorship request for the
+          <strong>{{pack}}</strong>
+          package. Thank you for your interest.<br /><br />
+          Our team will contact you shortly to discuss the next steps and
+          provide further details.
+        </p>
+
+        <div class="meta">
+          <strong>Submitted details:</strong>
+          <ul>
+            <li>Email: {{email}}</li>
+            <li>Phone: {{phone}}</li>
+            <li>Selected Pack: {{pack}}</li>
+            {{#if roundTable}}<li>Round Table Participation: Yes</li>{{/if}}
+            {{#if studyCase}}<li>Case Study Participation: Yes</li>{{/if}}
+            {{#if totemSize}}<li>Totem Size: {{totemSize}}</li>{{/if}}
+            {{#if vipExtra}}<li>Extra VIP Passes: {{vipExtra}}</li>{{/if}}
+            <li>Total Estimate: {{total}} €</li>
+          </ul>
+        </div>
+
+        <div class="footer">
+          L’équipe MLDFA • Moroccan Lighting Day Africa<br />
+          Cet e-mail confirme la réception de votre demande de sponsoring / This
+          email confirms receipt of your sponsorship request.
+        </div>
+      </div>
     </div>
-    <h1>Réception de votre demande de sponsoring: "{{pack}}"</h1>
-    <p>
-      Cher (e) {{user}},<br><br>
-      Nous avons bien reçu votre demande de sponsoring. Merci pour votre intérêt.
-      Notre équipe vous contactera dans les bref délais pour discuter de la procédure à suivre.
-      N'hésitez pas à nous contacter pour toute question.<br><br>
-    Cordialement,<br><br>
-    L’équipe MLDFA
-    </p>
-  </div>
-</body>
+  </body>
 </html>

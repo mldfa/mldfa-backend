@@ -4,25 +4,17 @@ import sendEmail from "../utils/sendEmail.js";
 import path from "path";
 import ExcelJS from "exceljs";
 import fs from "fs";
-import { URL } from "url";
+import { URL, fileURLToPath } from "url";
 import subscriberModel from "../models/subscriber.model.js";
 
 const addNewSubscriberService = async (subscriberData) => {
-  const subjects = [
-    "Confirmation de votre participation et réservation pour le Gala Prestige et le Cocktail Networking",
-    "Confirmation de votre participation et réservation pour le Gala Prestige",
-    "Confirmation de votre participation et réservation pour le Cocktail Networking",
-    "Confirmation votre participation",
-  ];
-  let subject = "";
-  if (subscriberData.dinner && subscriberData.cocktail) subject = subjects[0];
-  else if (subscriberData.dinner) subject = subjects[1];
-  else if (subscriberData.cocktail) subject = subjects[2];
-  else subject = subjects[3];
-
+  let subject = "Moroccan Lighting Days – VIP Confirmation / Confirmation VIP";
   try {
-    const __dirname = new URL(".", import.meta.url).pathname;
+    // const __dirname = new URL(".", import.meta.url).pathname;
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
     const templateSource = await getEmailTemplate(
+      // path.join(__dirname, "../templates/client.template.hbs")
       path.join(__dirname, "../templates/client.template.hbs")
     );
     const template = Handlebars.compile(templateSource);
@@ -70,8 +62,7 @@ const getSubscriberExcelService = async (res) => {
     "Secteur d’activité",
     "Email",
     "Téléphone",
-    "Dinner",
-    "COCKTAIL",
+    "Pass VIP",
   ];
   worksheet.addRow(headers);
   data.forEach((row) => {
@@ -83,7 +74,6 @@ const getSubscriberExcelService = async (res) => {
       row.email,
       row.phone,
       row.dinner ? "OUI" : "NO",
-      row.cocktail ? "OUI" : "NO",
     ];
     worksheet.addRow(values);
   });
